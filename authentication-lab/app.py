@@ -33,7 +33,7 @@ now = datetime.now()
 
 
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/signin', methods=['GET', 'POST'])
 def signin():
 	if request.method == 'POST':
 		email = request.form['email']
@@ -45,7 +45,7 @@ def signin():
 			print("Authentication Failed")
 	return render_template("signin.html")
 
-@app.route('/signup', methods=['GET', 'POST'])
+@app.route('/', methods=['GET', 'POST'])
 def signup():
 	if request.method == 'POST':
 		try:
