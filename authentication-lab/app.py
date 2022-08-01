@@ -19,14 +19,13 @@ config = {
 
   "appId": "1:862144256115:web:77442267a9078423d2b206",
 
-  "measurementId": "G-QHEETK0LS6", "databaseURL": ""
+  "measurementId": "G-QHEETK0LS6", "databaseURL": "https://database-lab-3fb7c-default-rtdb.europe-west1.firebasedatabase.app/"
 
 }
 
 firebase = pyrebase.initialize_app(config)
 auth = firebase.auth()
 db = firebase.database()
-
 
 @app.route('/', methods=['GET', 'POST'])
 def signin():
@@ -46,6 +45,8 @@ def signup():
 		try:
 			login_session['email'] = request.form['email']
 			login_session['password'] = request.form['password']
+			user = {"full_name": request.form['full_name'], "username": request.form['username'], "bio": request.form['bio']}
+			db.child("Users").child(login_session['user']['localId']).get().val()
 			return redirect(url_for('add_tweet'))
 		except:
 			print("Authentication Failed")
