@@ -1,7 +1,9 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
 from flask import session as login_session
 import pyrebase
-import datetime
+from datetime import date
+from datetime import datetime
+
 app = Flask(__name__, template_folder='templates', static_folder='static')
 app.config['SECRET_KEY'] = 'super-secret-key'
 
@@ -26,6 +28,9 @@ config = {
 firebase = pyrebase.initialize_app(config)
 auth = firebase.auth()
 db = firebase.database()
+today = date.today()
+now = datetime.now()
+
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -57,7 +62,7 @@ def signup():
 @app.route('/add_tweet', methods=['GET', 'POST'])
 def add_tweet():
 	if request.method == "POST":
-		ts = datetime.datetime.now().timestamp()
+		ts = now.strftime("%d/%m/%Y %H:%M:%S")
 		tweet = {"title": request.form['title'], "text": request.form['text'], "uid": login_session['user']['localId'], "timestamp": ts }
 		db.child("Tweets").push(tweet)
 		return redirect(url_for('all_tweets'))
