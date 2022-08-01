@@ -67,6 +67,7 @@ def add_tweet():
 		db.child("Tweets").push(tweet)
 		return redirect(url_for('all_tweets'))
 	return render_template("add_tweet.html")
+	
 @app.route('/all_tweets', methods=['GET', 'POST'])
 def all_tweets():
 	return render_template("all_tweets.html", tweets=db.child("Tweets").get().val())
