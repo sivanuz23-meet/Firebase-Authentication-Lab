@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+	<style type="text/css">
+		.center{
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+	<div class="center">
+	{%for i in tweets%}
+		<h1>{{tweets[i]['title']}}<br><br></h1>
+		<h2>{{tweets[i]['text']}}<br><br></h2>
+		<p>{{tweets[i]['timestamp']}}<br>
+	{%endfor%}
+</div>
+
+</body>
+</html>
